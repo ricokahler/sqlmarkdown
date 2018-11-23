@@ -1,2 +1,5 @@
 node_modules
 .DS_Store
+*.md.js
+*.md.js.html
+sql-md.js

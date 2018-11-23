@@ -17,6 +17,7 @@ interface ConnectionOptions<
 export default function createStore<S>(initialState: S) {
   const Store = React.createContext<S>(initialState);
   const store = createState(initialState);
+  const subscribers = new Set<(s: S) => void>();
 
   class Provider extends React.Component<{}, { providerState: S }> {
     state = {
@@ -62,5 +63,15 @@ export default function createStore<S>(initialState: S) {
       };
   }
 
-  return { Provider, withStore };
+  function subscribe(subscriber: (s: S) => void) {
+    subscribers.add(subscriber);
+
+    function unsubscribe() {
+      subscribers.delete(subscriber);
+    }
+
+    return unsubscribe;
+  }
+
+  return { Provider, withStore, subscribe, ...store };
 }

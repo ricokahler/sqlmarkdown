@@ -1,6 +1,9 @@
 import webpack from 'webpack';
 import path from 'path';
 import fs from 'fs';
+import parser from './parser';
+
+const resolveToUndefined = path.resolve(__dirname, './undefinedPlaceholder');
 
 const usage = `usage:
   sql-md [your-file.sql.md]
@@ -18,6 +21,8 @@ if (!verifyArguments(args)) {
   process.exit(1);
 }
 const filename = `${args[0]}.js`;
+
+const parsed = parser(fs.readFileSync(args[0]).toString());
 
 webpack(
   {
@@ -42,6 +47,9 @@ webpack(
     resolve: {
       extensions: ['.tsx', '.ts', '.js', '.jsx', '.css'],
       modules: [path.resolve(__dirname, './'), 'node_modules'],
+      alias: {
+        fs: resolveToUndefined,
+      },
     },
     externals: {
       sqlMarkdown: 'sqlMarkdown',
@@ -58,7 +66,7 @@ webpack(
       <html>
         <body>
           <script>
-            const sqlMarkdown = ${JSON.stringify([{ query: 'test' }])};
+            const sqlMarkdown = ${JSON.stringify(parsed)};
             ${stats.compilation.assets[filename].source()}
           </script>
         </body>
