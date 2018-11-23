@@ -1,8 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Store from 'store';
 
 import Repl from 'components/Repl';
+import TablePreview from 'components/TablePreview';
 
 const Root = styled.div`
   width: 100vw;
@@ -13,24 +14,25 @@ const Root = styled.div`
   left: 0;
 `;
 
-const Queries = styled.div``;
+const Body = styled.div``;
 const Aside = styled.div``;
 
-export default class App extends React.Component {
-  static propTypes = {
-    queries: PropTypes.arrayOf(PropTypes.string),
-  };
+interface AppProps {
+  content: Array<{ query: string } | { markdown: string }>;
+}
 
-  handleQuery = (query: string) => {};
-
+export default class App extends React.Component<AppProps> {
   render() {
     return (
-      <Root>
-        <Queries>{}</Queries>
-        <Aside>
-          <Repl />
-        </Aside>
-      </Root>
+      <Store.Provider>
+        <Root>
+          <Body>{}</Body>
+          <Aside>
+            <TablePreview />
+            <Repl />
+          </Aside>
+        </Root>
+      </Store.Provider>
     );
   }
 }

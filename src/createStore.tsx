@@ -18,7 +18,7 @@ export default function createStore<S>(initialState: S) {
   const Store = React.createContext<S>(initialState);
   const store = createState(initialState);
 
-  class StoreProvider extends React.Component<{}, { providerState: S }> {
+  class Provider extends React.Component<{}, { providerState: S }> {
     state = {
       providerState: initialState,
     };
@@ -62,5 +62,5 @@ export default function createStore<S>(initialState: S) {
       };
   }
 
-  return { StoreProvider, withStore };
+  return { Provider, withStore };
 }

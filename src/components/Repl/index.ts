@@ -1,8 +1,8 @@
-import store from 'store';
+import Store from 'store';
 
 import Repl from './Repl';
 
-export default store.withStore({
+export default Store.withStore({
   mapStateToProps: state => {
     return {
       queryHistory: ['test'],
