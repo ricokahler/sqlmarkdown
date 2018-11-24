@@ -37,9 +37,9 @@ module.exports = function parseMarkdown(content) {
       })
       .map(([text, code]) => {
         if (!code) return [{ markdown: text }];
-        return [{ markdown: makeHtml(text) }, { query: code }];
+        return [{ markdown: text }, { query: code }];
       }),
-  );
+  ).map(node => (node.markdown ? { markdown: makeHtml(node.markdown) } : node));
 
   return pairs;
 };

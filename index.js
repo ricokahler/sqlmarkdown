@@ -1,5 +1,6 @@
 const fs = require('fs');
 const parser = require('./parser');
+const path = require('path');
 
 const usage = `usage:
   sql-md [your-file.sql.md]
@@ -16,10 +17,10 @@ if (!verifyArguments(args)) {
   console.log(usage);
   process.exit(1);
 }
-const filename = `${args[0]}.js`;
+const filename = args[0];
 
 const parsed = parser(fs.readFileSync(args[0]).toString());
-const sqlMdBuild = fs.readFileSync('./sql-md.js').toString();
+const sqlMdBuild = fs.readFileSync(path.resolve(__dirname, './sql-md.js')).toString();
 
 const html = `
   <html>
@@ -43,4 +44,4 @@ const html = `
   </html>
 `;
 
-fs.writeFileSync(`${filename}.html`, html);
+fs.writeFileSync(`${encodeURIComponent(filename)}.html`, html);
