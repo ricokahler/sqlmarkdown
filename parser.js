@@ -1,13 +1,11 @@
-import matchAll from './matchAll';
-import flatten from 'lodash/flatten';
-import showdown from 'showdown';
+const matchAll = require('./matchAll');
+const flatten = require('lodash/flatten');
+const showdown = require('showdown');
 
 const converter = new showdown.Converter();
 const makeHtml = converter.makeHtml.bind(converter);
 
-export default function parseMarkdown(
-  content: string,
-): Array<{ query: string } | { markdown: string }> {
+module.exports = function parseMarkdown(content) {
   const matches = matchAll(/```sql\n((?:.(?!(```)))*)\n```/is, content);
 
   const indexes = [
@@ -25,15 +23,12 @@ export default function parseMarkdown(
 
   const pairs = flatten(
     splits
-      .reduce(
-        (tuples, next, index) => {
-          const tuple = tuples[Math.floor(index / 2)] || [];
-          tuple[index % 2] = next;
-          tuples[Math.floor(index / 2)] = tuple;
-          return tuples;
-        },
-        [] as [string, string][],
-      )
+      .reduce((tuples, next, index) => {
+        const tuple = tuples[Math.floor(index / 2)] || [];
+        tuple[index % 2] = next;
+        tuples[Math.floor(index / 2)] = tuple;
+        return tuples;
+      }, [])
       .map(([text, code]) => {
         const match = /```sql\n((?:.(?!(```)))*)\n```/is.exec(code);
         if (!match) return [text];
@@ -47,4 +42,4 @@ export default function parseMarkdown(
   );
 
   return pairs;
-}
+};

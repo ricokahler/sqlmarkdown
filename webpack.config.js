@@ -1,9 +1,9 @@
 const path = require('path');
-const resolveToUndefined = path.resolve(__dirname, './src/undefinedPlaceholder');
+const resolveToUndefined = path.resolve(__dirname, './undefinedPlaceholder');
 
 module.exports = {
   mode: process.env.NODE_ENV !== 'production' ? 'development' : 'production',
-  entry: path.resolve(__dirname, './src/web.tsx'),
+  entry: path.resolve(__dirname, './src/index.tsx'),
   output: {
     path: path.resolve('.'),
     filename: 'sql-md.js',
