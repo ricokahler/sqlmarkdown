@@ -1,6 +1,6 @@
 {
-  "name": "sql-md",
-  "version": "0.1.0-alpha.1",
+  "name": "sqlmarkdown",
+  "version": "0.1.0-alpha.3",
   "description": "Convert markdown with SQL snippets to an interactive literate programming playground.",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,8 @@
   },
   "author": "ricokahler@me.com",
   "license": "MIT",
-  "dependencies": {
+  "repository": "https://github.com/ricokahler/sql-md",
+  "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.8",
     "@fortawesome/free-solid-svg-icons": "^5.5.0",
     "@fortawesome/react-fontawesome": "^0.1.3",
@@ -24,10 +25,8 @@
     "@types/webpack": "^4.4.19",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^1.0.1",
-    "i": "^0.3.6",
     "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
-    "npm": "^6.4.1",
     "polished": "^2.3.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -44,6 +43,6 @@
     "webpack-dev-server": "^3.1.10"
   },
   "bin": {
-    "sql-md": "./index.js"
+    "sqlmarkdown": "./index.js"
   }
 }
