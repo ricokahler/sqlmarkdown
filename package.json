@@ -10,7 +10,7 @@
   },
   "author": "ricokahler@me.com",
   "license": "MIT",
-  "repository": "https://github.com/ricokahler/sql-md",
+  "repository": "https://github.com/ricokahler/sqlmarkdown",
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.8",
     "@fortawesome/free-solid-svg-icons": "^5.5.0",
