@@ -4,7 +4,7 @@ import * as styles from 'styles';
 
 import Repl from 'components/Repl';
 import Query from 'components/Query';
-import TablePreview from 'components/TablePreview';
+import TableViewer from 'components/TableViewer';
 import IconButton from 'components/IconButtonDark';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -109,7 +109,7 @@ export default class App extends React.Component<AppProps> {
         )}
         {!bodyExpanded && (
           <Aside style={{ flex: asideExpanded ? '1 1 auto' : '0 0 auto' }}>
-            <TablePreview />
+            <TableViewer />
             <Repl />
           </Aside>
         )}
