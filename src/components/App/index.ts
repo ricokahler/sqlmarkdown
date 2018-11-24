@@ -9,8 +9,8 @@ export default Store.withStore({
   mapStateToProps: (state, ownProps: OwnProps) => {
     return {
       content: ownProps.content,
-      asideFullscreen: false,
-      bodyFullScreen: false,
+      asideExpanded: state.asideExpanded,
+      bodyExpanded: state.bodyExpanded,
     };
   },
   mapDispatchToProps: () => ({}),

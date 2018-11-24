@@ -9,6 +9,7 @@ const initialState = {
   queryHistory: [] as string[],
   terminalHidden: false,
   asideExpanded: false,
+  bodyExpanded: false,
 };
 
 type RootState = typeof initialState;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import * as styles from 'styles';
 
 import Repl from 'components/Repl';
 import TablePreview from 'components/TablePreview';
@@ -16,12 +17,12 @@ const Root = styled.div`
 
 const Body = styled.div`
   flex: 1 1 auto;
-  border: 1px solid red;
+  background-color: ${styles.whiteTer};
 `;
 const Aside = styled.div`
-  flex: 0 0 auto;
   width: 30rem;
-  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
 `;
 const Markdown = styled.div``;
 
@@ -39,16 +40,16 @@ function isMarkdown(maybe: any): maybe is { markdown: string } {
 
 interface AppProps {
   content: Array<{ query: string } | { markdown: string }>;
-  asideFullscreen: boolean;
-  bodyFullScreen: boolean;
+  asideExpanded: boolean;
+  bodyExpanded: boolean;
 }
 
 export default class App extends React.Component<AppProps> {
   render() {
-    const { content, asideFullscreen, bodyFullScreen } = this.props;
+    const { content, asideExpanded, bodyExpanded } = this.props;
     return (
       <Root>
-        {!asideFullscreen && (
+        {!asideExpanded && (
           <Body>
             {content.map(item => {
               if (isQuery(item)) {
@@ -63,8 +64,8 @@ export default class App extends React.Component<AppProps> {
             })}
           </Body>
         )}
-        {!bodyFullScreen && (
-          <Aside>
+        {!bodyExpanded && (
+          <Aside style={{ flex: asideExpanded ? '1 1 auto' : '0 0 auto' }}>
             <TablePreview />
             <Repl />
           </Aside>

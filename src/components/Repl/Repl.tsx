@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const prompt = 'SQL> ';
 
 const Root = styled.div`
+  flex: 0 0 auto;
   background-color: black;
   color: white;
   display: flex;
