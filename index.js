@@ -44,4 +44,4 @@ const html = `
   </html>
 `;
 
-fs.writeFileSync(`${encodeURIComponent(filename)}.html`, html);
+fs.writeFileSync(`${filename}.html`, html);
