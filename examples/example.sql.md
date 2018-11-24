@@ -1,6 +1,13 @@
-# A simple example
+# Welcome to SQL Markdown - A simple example
+
+> **SQL Markdown**
+>
+> Convert markdown with SQL snippets to an interactive literate programming playground.<br>
+> Powered by [sql.js](https://github.com/kripken/sql.js/) (sqlite compiled to javascript)
 
 ## Create the tables
+
+SQL Markdown makes it really easy to write about what your queries are doing.
 
 ```sql
 -- run_on_start
@@ -15,6 +22,8 @@ CREATE TABLE Persons (
 
 ## Insert some data
 
+It's great for educational purposes.
+
 ```sql
 -- run_on_start
 INSERT INTO Persons VALUES (
@@ -26,6 +35,8 @@ INSERT INTO Persons VALUES (
 )
 ```
 
+And makes for great demos!
+
 ## See the results
 
 ```sql
@@ -33,4 +44,6 @@ INSERT INTO Persons VALUES (
 SELECT * FROM Persons;
 ```
 
-## Enjoy SQL-MD!
+## Get started with SQL Markdown
+
+[Back to the readme](https://github.com/ricokahler/sqlmarkdown)

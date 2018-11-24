@@ -5,6 +5,8 @@
 > Convert markdown with SQL snippets to an interactive literate programming playground.<br>
 > Powered by [sql.js](https://github.com/kripken/sql.js/) (sqlite compiled to javascript)
 
+### [DEMO](https://ricokahler.github.io/sqlmarkdown/index.html)
+
 ## What is SQL Markdown?
 
 SQL Markdown is markdown converter that will convert your markdown to an interactive web page in a single HTML file.
@@ -24,12 +26,12 @@ SQL Snippets look like this:
     );
     ```
 
-From the example above, you can additionally add the comment `-- run_on_start` to signal to the interactive playground that that query should be ran when the playground is created.
+> **Note:** You can additionally add the comment `-- run_on_start` to signal to the interactive playground that that query should be ran when the playground is created.
 
 See the:
 
 1. [simple example markdown](./examples/example.sql.md)
-2. [simple example rendered](./docs)
+2. [simple example rendered](https://ricokahler.github.io/sqlmarkdown/index.html)
 
 ## Installation and usage
 
