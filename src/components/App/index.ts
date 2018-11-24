@@ -13,5 +13,9 @@ export default Store.withStore({
       bodyExpanded: state.bodyExpanded,
     };
   },
-  mapDispatchToProps: () => ({}),
+  mapDispatchToProps: dispatch => ({
+    onExpandBody: () => {
+      dispatch(state => ({ ...state, bodyExpanded: !state.bodyExpanded }));
+    },
+  }),
 })(App);

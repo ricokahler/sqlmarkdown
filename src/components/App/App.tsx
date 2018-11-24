@@ -4,6 +4,7 @@ import * as styles from 'styles';
 
 import Repl from 'components/Repl';
 import TablePreview from 'components/TablePreview';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Root = styled.div`
   width: 100vw;
@@ -14,7 +15,6 @@ const Root = styled.div`
   left: 0;
   display: flex;
 `;
-
 const Body = styled.div`
   flex: 1 1 auto;
   background-color: ${styles.whiteTer};
@@ -25,6 +25,40 @@ const Aside = styled.div`
   flex-direction: column;
 `;
 const Markdown = styled.div``;
+const ButtonRow = styled.div`
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid ${styles.grayLight};
+  padding: 0 ${styles.space(-1)};
+`;
+const Content = styled.div`
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  & > * {
+    flex: 0 0 auto;
+  }
+`;
+const IconButton = styled.button`
+  color: ${styles.grayLight};
+  outline: none;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding: ${styles.space(-1)};
+
+  &:focus {
+    color: ${styles.focus(styles.grayLight)};
+  }
+  &:hover {
+    color: ${styles.hover(styles.grayLight)};
+  }
+  &:active {
+    color: ${styles.active(styles.grayLight)};
+  }
+`;
 
 function isQuery(maybe: any): maybe is { query: string } {
   if (!maybe) return false;
@@ -42,26 +76,34 @@ interface AppProps {
   content: Array<{ query: string } | { markdown: string }>;
   asideExpanded: boolean;
   bodyExpanded: boolean;
+  onExpandBody: () => void;
 }
 
 export default class App extends React.Component<AppProps> {
   render() {
-    const { content, asideExpanded, bodyExpanded } = this.props;
+    const { content, asideExpanded, bodyExpanded, onExpandBody } = this.props;
     return (
       <Root>
         {!asideExpanded && (
           <Body>
-            {content.map(item => {
-              if (isQuery(item)) {
+            <ButtonRow>
+              <IconButton onClick={onExpandBody}>
+                <FontAwesomeIcon icon={bodyExpanded ? 'chevron-left' : 'chevron-right'} />
+              </IconButton>
+            </ButtonRow>
+            <Content>
+              {content.map(item => {
+                if (isQuery(item)) {
+                  return null;
+                }
+
+                if (isMarkdown(item)) {
+                  return <Markdown dangerouslySetInnerHTML={{ __html: item.markdown }} />;
+                }
+
                 return null;
-              }
-
-              if (isMarkdown(item)) {
-                return <Markdown dangerouslySetInnerHTML={{ __html: item.markdown }} />;
-              }
-
-              return null;
-            })}
+              })}
+            </Content>
           </Body>
         )}
         {!bodyExpanded && (
