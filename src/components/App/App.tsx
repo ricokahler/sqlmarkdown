@@ -80,6 +80,20 @@ interface AppProps {
 }
 
 export default class App extends React.Component<AppProps> {
+  componentDidMount() {
+    const { content, onQuery } = this.props;
+
+    setTimeout(() => {
+      const queriesToRunOnStart = content
+        .filter(isQuery)
+        .filter(({ query }) => query.includes('-- run_on_start'))
+        .map(node => node.query);
+
+      for (const query of queriesToRunOnStart) {
+        onQuery(query);
+      }
+    }, 300);
+  }
   render() {
     const { content, asideExpanded, bodyExpanded, onExpandBody, onQuery } = this.props;
     return (

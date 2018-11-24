@@ -3,6 +3,7 @@
 ## Create the tables
 
 ```sql
+-- run_on_start
 CREATE TABLE Persons (
   PersonID int,
   LastName varchar(255),
@@ -15,6 +16,7 @@ CREATE TABLE Persons (
 ## Insert some data
 
 ```sql
+-- run_on_start
 INSERT INTO Persons VALUES (
   1,
   'Kahler',
@@ -27,6 +29,7 @@ INSERT INTO Persons VALUES (
 ## See the results
 
 ```sql
+-- run_on_start
 SELECT * FROM Persons;
 ```
 
