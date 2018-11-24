@@ -64,11 +64,22 @@ webpack(
 
     const html = `
       <html>
+        <head>
+          <title>SQL Markdown Document</title>
+          <style>
+            * {
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+                Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+          </style>
+        </head>
         <body>
           <script>
-            const sqlMarkdown = ${JSON.stringify(parsed)};
-            ${stats.compilation.assets[filename].source()}
+            window.sqlMarkdown = ${JSON.stringify(parsed)};
           </script>
+          <script src="data:application/javascript;base64,${Buffer.from(
+            stats.compilation.assets[filename].source(),
+          ).toString('base64')}"></script>
         </body>
       </html>
     `;
