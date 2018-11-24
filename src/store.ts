@@ -7,7 +7,7 @@ const db = new sql.Database();
 
 const initialState = {
   queryHistory: [] as string[],
-  terminalExpanded: false,
+  terminalHidden: false,
   asideExpanded: false,
 };
 

@@ -5,7 +5,7 @@ export default Store.withStore({
   mapStateToProps: state => {
     return {
       queryHistory: state.queryHistory,
-      terminalExpanded: state.terminalExpanded,
+      terminalHidden: state.terminalHidden,
       asideExpanded: state.asideExpanded,
     };
   },
@@ -16,8 +16,8 @@ export default Store.withStore({
         queryHistory: [...state.queryHistory, query],
       }));
     },
-    onExpandTerminal: () => {
-      dispatch(state => ({ ...state, terminalExpanded: !state.terminalExpanded }));
+    onHideTerminal: () => {
+      dispatch(state => ({ ...state, terminalHidden: !state.terminalHidden }));
     },
     onExpandAside: () => {
       dispatch(state => ({ ...state, asideExpanded: !state.asideExpanded }));

@@ -10,7 +10,6 @@ const prompt = 'SQL> ';
 const Root = styled.div`
   background-color: black;
   color: white;
-  height: 20rem;
   display: flex;
   flex-direction: column;
   font-family: monospace;
@@ -30,6 +29,7 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${styles.space(-2)};
+  height: 20rem;
   overflow: auto;
 `;
 const History = styled.div`
@@ -66,10 +66,10 @@ const IconButton = styled.button`
 
 export interface ReplProps {
   queryHistory: string[];
-  terminalExpanded: boolean;
+  terminalHidden: boolean;
   asideExpanded: boolean;
   onQuery: (query: string) => void;
-  onExpandTerminal: () => void;
+  onHideTerminal: () => void;
   onExpandAside: () => void;
   onClear: () => void;
 }
@@ -162,9 +162,9 @@ export default class Repl extends React.PureComponent<ReplProps, ReplState> {
   render() {
     const {
       queryHistory,
-      terminalExpanded,
+      terminalHidden,
       asideExpanded,
-      onExpandTerminal,
+      onHideTerminal,
       onExpandAside,
       onClear,
     } = this.props;
@@ -176,26 +176,28 @@ export default class Repl extends React.PureComponent<ReplProps, ReplState> {
           <IconButton onClick={onExpandAside}>
             <FontAwesomeIcon icon={asideExpanded ? 'chevron-right' : 'chevron-left'} />
           </IconButton>
-          <IconButton onClick={onExpandTerminal}>
-            <FontAwesomeIcon icon={terminalExpanded ? 'chevron-down' : 'chevron-up'} />
+          <IconButton onClick={onHideTerminal}>
+            <FontAwesomeIcon icon={terminalHidden ? 'chevron-up' : 'chevron-down'} />
           </IconButton>
           <IconButton onClick={onClear}>
             <FontAwesomeIcon icon="ban" />
           </IconButton>
         </ButtonBar>
-        <Body onClick={this.handleBodyClick}>
-          <History>
-            {queryHistory.map((query, index) => (
-              <Query key={index}>{query}</Query>
-            ))}
-          </History>
-          <Input
-            ref={this.inputRef}
-            value={`${prompt}${query}`}
-            onChange={this.handleInput}
-            onKeyDown={this.handleInputKeyDown}
-          />
-        </Body>
+        {!terminalHidden && (
+          <Body onClick={this.handleBodyClick}>
+            <History>
+              {queryHistory.map((query, index) => (
+                <Query key={index}>{query}</Query>
+              ))}
+            </History>
+            <Input
+              ref={this.inputRef}
+              value={`${prompt}${query}`}
+              onChange={this.handleInput}
+              onKeyDown={this.handleInputKeyDown}
+            />
+          </Body>
+        )}
       </Root>
     );
   }
