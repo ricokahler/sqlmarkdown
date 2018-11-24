@@ -17,5 +17,11 @@ export default Store.withStore({
     onExpandBody: () => {
       dispatch(state => ({ ...state, bodyExpanded: !state.bodyExpanded }));
     },
+    onQuery: (query: string) => {
+      dispatch(state => ({
+        ...state,
+        queryHistory: [...state.queryHistory, query],
+      }));
+    },
   }),
 })(App);

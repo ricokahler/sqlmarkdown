@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import * as styles from 'styles';
 
 import Repl from 'components/Repl';
+import Query from 'components/Query';
 import TablePreview from 'components/TablePreview';
+import IconButton from 'components/IconButtonDark';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Root = styled.div`
@@ -17,14 +19,18 @@ const Root = styled.div`
 `;
 const Body = styled.div`
   flex: 1 1 auto;
-  background-color: ${styles.whiteTer};
+  background-color: ${styles.whiteBis};
+  display: flex;
+  flex-direction: column;
 `;
 const Aside = styled.div`
   width: 30rem;
   display: flex;
   flex-direction: column;
 `;
-const Markdown = styled.div``;
+const Markdown = styled.div`
+  margin-bottom: ${styles.space(0)};
+`;
 const ButtonRow = styled.div`
   flex: 0 0 auto;
   display: flex;
@@ -36,27 +42,20 @@ const Content = styled.div`
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  overflow: auto;
   & > * {
     flex: 0 0 auto;
   }
+  padding: ${styles.space(0)};
+  overflow: auto;
 `;
-const IconButton = styled.button`
-  color: ${styles.grayLight};
-  outline: none;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  padding: ${styles.space(-1)};
-
-  &:focus {
-    color: ${styles.focus(styles.grayLight)};
-  }
-  &:hover {
-    color: ${styles.hover(styles.grayLight)};
-  }
-  &:active {
-    color: ${styles.active(styles.grayLight)};
+const ContentCenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 60vw;
+  width: 60rem;
+  margin: 0 auto;
+  & > * {
+    flex: 0 0 auto;
   }
 `;
 
@@ -77,11 +76,12 @@ interface AppProps {
   asideExpanded: boolean;
   bodyExpanded: boolean;
   onExpandBody: () => void;
+  onQuery: (query: string) => void;
 }
 
 export default class App extends React.Component<AppProps> {
   render() {
-    const { content, asideExpanded, bodyExpanded, onExpandBody } = this.props;
+    const { content, asideExpanded, bodyExpanded, onExpandBody, onQuery } = this.props;
     return (
       <Root>
         {!asideExpanded && (
@@ -92,17 +92,18 @@ export default class App extends React.Component<AppProps> {
               </IconButton>
             </ButtonRow>
             <Content>
-              {content.map(item => {
-                if (isQuery(item)) {
+              <ContentCenter>
+                {content.map(item => {
+                  if (isQuery(item)) {
+                    return <Query query={item.query} onExecute={onQuery} />;
+                  }
+
+                  if (isMarkdown(item)) {
+                    return <Markdown dangerouslySetInnerHTML={{ __html: item.markdown }} />;
+                  }
                   return null;
-                }
-
-                if (isMarkdown(item)) {
-                  return <Markdown dangerouslySetInnerHTML={{ __html: item.markdown }} />;
-                }
-
-                return null;
-              })}
+                })}
+              </ContentCenter>
             </Content>
           </Body>
         )}

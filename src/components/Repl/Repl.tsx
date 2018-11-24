@@ -4,6 +4,7 @@ import * as styles from 'styles';
 const { max, min } = Math;
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import IconButton from 'components/IconButtonLight';
 
 const prompt = 'SQL> ';
 
@@ -45,24 +46,6 @@ const ButtonBar = styled.div`
   align-items: center;
   flex: 0 0 auto;
   border-bottom: 1px solid ${styles.grayDark};
-`;
-const IconButton = styled.button`
-  color: white;
-  outline: none;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  padding: ${styles.space(-1)};
-
-  &:focus {
-    color: ${styles.focus('white')};
-  }
-  &:hover {
-    color: ${styles.hover('white')};
-  }
-  &:active {
-    color: ${styles.active('white')};
-  }
 `;
 
 export interface ReplProps {
