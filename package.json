@@ -1,12 +1,12 @@
 {
   "name": "sqlmarkdown",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Convert markdown with SQL snippets to an interactive literate programming playground.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack -p"
   },
   "author": "ricokahler@me.com",
   "license": "MIT",
@@ -44,7 +44,10 @@
     "sqlmarkdown": "./index.js"
   },
   "dependencies": {
+    "@types/uuid": "^3.4.4",
     "lodash": "^4.17.11",
-    "showdown": "^1.9.0"
+    "react-ace": "^6.2.0",
+    "showdown": "^1.9.0",
+    "uuid": "^3.3.2"
   }
 }

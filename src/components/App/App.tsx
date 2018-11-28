@@ -19,9 +19,10 @@ const Root = styled.div`
 `;
 const Body = styled.div`
   flex: 1 1 auto;
-  background-color: ${styles.whiteBis};
+  background-color: ${styles.grayDark};
   display: flex;
   flex-direction: column;
+  color: white;
 `;
 const Aside = styled.div`
   width: 30rem;
