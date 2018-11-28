@@ -1,25 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as styles from 'styles';
+import uuid from 'uuid/v4';
 
+import AceEditor from 'react-ace';
 import IconButton from 'components/IconButtonDark';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import 'brace/mode/sql';
+import 'brace/theme/dracula';
 
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  padding: ${styles.space(0)};
-  background-color: ${styles.grayLighter};
+  color: white;
+  background-color: ${styles.grayDarker};
   margin-bottom: ${styles.space(0)};
-`;
-const TextArea = styled.textarea`
-  flex: 0 0 auto;
-  resize: vertical;
-  background-color: transparent;
-  border: none;
-  outline: none;
   font-family: monospace;
-  margin-bottom: ${styles.space(0)};
+  & * {
+    font-family: monospace;
+  }
 `;
 const ButtonBar = styled.div`
   border-top: 1px solid ${styles.grayLight};
@@ -38,6 +38,7 @@ interface QueryState {
 }
 
 export default class Query extends React.PureComponent<QueryProps, QueryState> {
+  divId = `query-${uuid()}`;
   constructor(props: QueryProps) {
     super(props);
 
@@ -46,9 +47,8 @@ export default class Query extends React.PureComponent<QueryProps, QueryState> {
     };
   }
 
-  handleQueryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.currentTarget.value;
-    this.setState({ currentQuery: value });
+  handleQueryChange = (currentQuery: string) => {
+    this.setState({ currentQuery });
   };
 
   handleReset = () => {
@@ -66,7 +66,16 @@ export default class Query extends React.PureComponent<QueryProps, QueryState> {
 
     return (
       <Root>
-        <TextArea value={currentQuery} onChange={this.handleQueryChange} rows={10} />
+        <AceEditor
+          mode="sql"
+          theme="dracula"
+          width="100%"
+          value={currentQuery}
+          onChange={this.handleQueryChange}
+          name={this.divId}
+          editorProps={{ $blockScrolling: true }}
+          height="500px"
+        />
         <ButtonBar>
           <IconButton onClick={this.handleReset}>
             <FontAwesomeIcon icon="undo" />
